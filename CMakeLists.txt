@@ -6,5 +6,9 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 find_package(fmt CONFIG REQUIRED)
 
-add_executable(calc custom_sin.cpp)
+include_directories(include)
+add_executable(calc
+    src/main.cpp
+    src/func.cpp
+)
 target_link_libraries(calc PRIVATE fmt::fmt)

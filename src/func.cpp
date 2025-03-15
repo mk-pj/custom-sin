@@ -1,19 +1,6 @@
-#include <cmath>
-#include <filesystem>
-#include <fstream>
-#include <iostream>
-#include <sstream>
-#include <vector>
-#include <fmt/core.h>
+#include "func.h"
 
-#define FIRST_QUARTER_END (M_PI / 2)
-#define SECOND_QUARTER_END M_PI
-#define THIRD_QUARTER_END (3 * M_PI / 2)
-#define _2PI (2 * M_PI)
-
-using std::vector;
-
-double custom_sin(double x, const int term_count, const bool is_deg = false) {
+double custom_sin(double x, const int term_count, const bool is_deg) {
   if (is_deg)
     x *= M_PI / 180;
 
@@ -80,8 +67,8 @@ void rad_comparison(
     ss << X[i] << ',' << Y_calc[i] << ',' << Y[i] << ',' << error << '\n';
   }
 
-  std::filesystem::create_directory("data_output/");
-  std::fstream rad("data_output/" + title, std::ios::out | std::ios::trunc);
+  std::filesystem::create_directory("../data_output/");
+  std::fstream rad("../data_output/" + title, std::ios::out | std::ios::trunc);
   if (!rad) {
     std::cerr << "Failed to write to the file\n";
     return;
@@ -123,31 +110,12 @@ void deg_comparison(
     ss << X[i] << ',' << Y_calc[i] << ',' << Y[i] << ',' << error << '\n';
   }
 
-  std::filesystem::create_directory("data_output/");
-  std::fstream rad("data_output/" + title, std::ios::out | std::ios::trunc);
+  std::filesystem::create_directory("../data_output/");
+  std::fstream rad("../data_output/" + title, std::ios::out | std::ios::trunc);
   if (!rad) {
     std::cerr << "Failed to write to the file\n";
     return;
   }
   rad << ss.str();
   rad.close();
-}
-
-int main() {
-  int n = 100;
-  for (int i = 1; i <= 10; i++) {
-    fmt::println("{:^10}|{:^20}|{:^25}|{:^20}|{:^30}",
-                    "x", "sin_h", "c_sin", "error", "terms: " + std::to_string(i));
-    std::string rad_title{std::to_string(i) + "rad_data.csv"};
-    rad_comparison(n, i, 6 * M_PI, rad_title);
-
-    fmt::print("\n{:=^80}\n\n", "");
-
-    fmt::println("{:^10}|{:^20}|{:^25}|{:^20}|{:^30}",
-                    "x", "sin_h", "c_sin", "error", "terms: " + std::to_string(i));
-    std::string deg_title{std::to_string(i) + "deg_data.csv"};
-    deg_comparison(n, i, 1080, deg_title);
-    printf("\n");
-  }
-  return 0;
 }

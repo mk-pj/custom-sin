@@ -1,0 +1,6 @@
+data_output
+charts
+*.exe
+*.out
+.idea
+cmake-build-debug
