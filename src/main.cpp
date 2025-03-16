@@ -1,7 +1,7 @@
 #include "func.h"
 
 int main() {
-  int n = 100;
+  int n = 1000;
   for (int i = 1; i <= 10; i++) {
     fmt::println("{:^10}|{:^20}|{:^25}|{:^20}|{:^30}",
                     "x", "sin_h", "c_sin", "error", "terms: " + std::to_string(i));
