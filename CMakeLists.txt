@@ -4,7 +4,15 @@ project(calc)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-find_package(fmt CONFIG REQUIRED)
+include(FetchContent)
+
+FetchContent_Declare(
+        fmt
+        GIT_REPOSITORY https://github.com/fmtlib/fmt.git
+        GIT_TAG 6fdf225
+)
+
+FetchContent_MakeAvailable(fmt)
 
 include_directories(include)
 
